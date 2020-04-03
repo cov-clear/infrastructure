@@ -3,6 +3,7 @@ module "users" {
 
   developers = [
     "jose.galarza",
+    "kostas.stamatoukos"
   ]
 }
 
