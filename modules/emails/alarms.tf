@@ -1,6 +1,6 @@
 resource "aws_sns_topic" "ses_alarms" {
-  name         = "ses-alarms"
-  display_name = "SES Alarms"
+  name         = "${var.short_name}-ses-alarms"
+  display_name = "${var.short_name}-ses-alarms"
 }
 
 resource "aws_ses_identity_notification_topic" "bounces" {
