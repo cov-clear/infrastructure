@@ -10,11 +10,6 @@ module "users" {
 module "emails" {
   source = "../../modules/emails"
 
-  domain = "cov-clear.com"
-}
-
-module "production_backend" {
-  source = "../../modules/backend"
-
-  app_name = "production-backend"
+  domain     = "cov-clear.com"
+  short_name = "cov-clear"
 }
