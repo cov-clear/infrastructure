@@ -4,7 +4,6 @@ variable "identifier" {
 
 variable "instance_class" {
   description = "The size of the DB instances (ex: db.m4.medium, etc)"
-  type        = string
 }
 
 variable "allocated_storage" {
@@ -19,28 +18,23 @@ variable "storage_encrypted" {
 
 variable "engine_version" {
   description = "The version of PostgreSQL to use"
-  type        = string
   default     = "12.2"
 }
 
 variable "engine_family" {
   description = "The version family of the engine (ex: postgres12)"
-  type        = string
 }
 
 variable "db_name" {
   description = "The name of the database"
-  type        = string
 }
 
 variable "db_user" {
   description = "The name of the root user"
-  type        = string
 }
 
 variable "db_password" {
   description = "The root password"
-  type        = string
 }
 
 variable "maintenance_window" {
@@ -64,7 +58,8 @@ variable "subnet_ids" {
 }
 
 variable "multi_az" {
-  description = "Should the database be "
+  description = "Should the database be multi_az enabled"
+  type = bool
 }
 
 variable "deletion_protection" {

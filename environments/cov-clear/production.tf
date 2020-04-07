@@ -33,7 +33,7 @@ resource "random_string" "prod_db_password" {
 module "production_database" {
   source = "../../modules/postgres"
 
-  identifier = "cov-clear-db"
+  identifier = "cov-clear-production-db"
   allocated_storage = 20
   db_name = "cov_clear"
   db_password = random_string.prod_db_password.result
