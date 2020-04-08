@@ -24,3 +24,24 @@ module "production_backend" {
   app_name = "cov-clear-prod-backend"
 }
 
+
+resource "random_string" "prod_db_password" {
+  length  = 16
+  special = false
+}
+
+module "production_database" {
+  source = "../../modules/postgres"
+
+  identifier = "cov-clear-production-db"
+  allocated_storage = 20
+  db_name = "cov_clear"
+  db_password = random_string.prod_db_password.result
+  db_user = "cov_clear"
+  engine_family = "postgres12"
+  engine_version = "12.2"
+  multi_az = true
+  instance_class = "db.m5.large"
+  subnet_ids = module.production_network.private_subnet_ids
+  storage_encrypted = true
+}
