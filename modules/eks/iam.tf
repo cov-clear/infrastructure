@@ -1,47 +1,34 @@
 resource "aws_iam_role" "eks" {
   name = "${var.cluster_name}-eks"
 
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": [
-          "eks.amazonaws.com"
-        ]
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "eks.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
 }
 
 resource "aws_iam_role_policy" "service_linked" {
   name = "${var.cluster_name}-service-linked"
   role = aws_iam_role.eks.name
 
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-        "Effect": "Allow",
-        "Action": "iam:CreateServiceLinkedRole",
-        "Resource": "arn:aws:iam::*:role/aws-service-role/*"
-    },
-    {
-        "Effect": "Allow",
-        "Action": [
-            "ec2:DescribeAccountAttributes"
-        ],
-        "Resource": "*"
-    }
-  ]
-}
-EOF
+  policy = jsonencode({
+    Statement = [{
+      Action   = "iam:CreateServiceLinkedRole"
+      Effect   = "Allow"
+      Resource = "arn:aws:iam::*:role/aws-service-role/*"
+      }, {
+      Action   = "ec2:DescribeAccountAttributes"
+      Effect   = "Allow"
+      Resource = "*"
+    }]
+    Version = "2012-10-17"
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "eks-AmazonEKSClusterPolicy" {

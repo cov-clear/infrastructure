@@ -11,19 +11,15 @@ resource "aws_iam_user_policy" "send_emails" {
   name = "SendEmails"
   user = aws_iam_user.backend.name
 
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
+  policy = jsonencode({
+    Statement = [{
+      Action = [
         "ses:SendEmail",
         "ses:SendRawEmail"
       ],
-      "Resource": "*"
-    }
-  ]
-}
-EOF
+      Effect   = "Allow"
+      Resource = "*"
+    }]
+    Version = "2012-10-17"
+  })
 }
