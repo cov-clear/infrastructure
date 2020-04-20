@@ -1,9 +1,5 @@
-module "network" {
-  source = "../../modules/network"
-
-  short_name = "cov-clear-prod"
-  aws_region = "eu-west-1"
-  cidr       = "10.0.0.0/16"
+locals {
+  project_name = "cov-clear-prod"
 
   public_subnets = [
     { availability_zone = "eu-west-1a", cidr = "10.0.0.0/22" },
@@ -18,9 +14,71 @@ module "network" {
   ]
 }
 
-module "backend" {
-  source = "../../modules/backend"
+module "users" {
+  source = "../../modules/users"
 
-  app_name = "cov-clear-prod-backend"
+  developers = [
+    "jose.galarza",
+    "kostas.stamatoukos"
+  ]
 }
 
+module "emails" {
+  source = "../../modules/emails"
+
+  domain     = "cov-clear.com"
+  short_name = "cov-clear"
+}
+
+module "network" {
+  source = "../../modules/network"
+
+  short_name = local.project_name
+  aws_region = "eu-west-1"
+  cidr       = "10.0.0.0/16"
+
+  public_subnets  = local.public_subnets
+  private_subnets = local.private_subnets
+}
+
+resource "random_string" "db_password" {
+  length  = 32
+  special = false
+}
+
+module "database" {
+  source = "../../modules/postgres"
+
+  identifier        = "${local.project_name}-db"
+  allocated_storage = 50
+  db_name           = "cov_clear_prod"
+  db_password       = random_string.db_password.result
+  db_user           = "cov_clear_prod"
+  engine_family     = "postgres12"
+  engine_version    = "12.2"
+  multi_az          = true
+  instance_class    = "db.t3.medium"
+  vpc_id            = module.network.vpc_id
+  subnet_ids        = module.network.private_subnet_ids
+  storage_encrypted = true
+}
+
+module "kubernetes" {
+  source = "../../modules/eks"
+
+  cluster_name  = local.project_name
+  public_access = true
+  subnet_ids    = module.network.private_subnet_ids
+
+  fargate_namespaces = [
+    "kube-system",
+    "prod-cov-clear-backend",
+    "staging-cov-clear-backend",
+  ]
+}
+
+module "backend_app" {
+  source = "../../modules/backend"
+
+  app_name = "${local.project_name}-backend"
+}
