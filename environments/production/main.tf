@@ -60,6 +60,7 @@ module "database" {
   instance_class    = "db.t3.medium"
   vpc_id            = module.network.vpc_id
   subnet_ids        = module.network.private_subnet_ids
+  allowed_cidrs     = local.private_subnets.*.cidr
   storage_encrypted = true
 }
 
@@ -67,7 +68,7 @@ module "kubernetes" {
   source = "../../modules/eks"
 
   cluster_name  = local.project_name
-  public_access = true
+  public_access = true # TODO: Close control place access behind a bastion
   subnet_ids    = module.network.private_subnet_ids
 
   fargate_namespaces = [

@@ -61,6 +61,11 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
+variable "allowed_cidrs" {
+  description = "CIDRs with allowed access to the postgreSQL port"
+  type        = list(string)
+}
+
 variable "multi_az" {
   description = "Should the database be multi_az enabled"
   type        = bool
