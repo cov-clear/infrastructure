@@ -50,6 +50,11 @@ resource "aws_eip" "publics" {
   count = length(var.public_subnets)
 
   vpc = true
+
+  tags = {
+    Name              = "${var.short_name}-nat-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
+    KubernetesCluster = var.short_name
+  }
 }
 
 resource "aws_nat_gateway" "privates" {
