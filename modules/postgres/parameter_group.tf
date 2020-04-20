@@ -1,16 +1,16 @@
 resource "aws_db_parameter_group" "main" {
-  name_prefix = "pg-${var.identifier}"
+  name        = "pg-${var.identifier}"
   description = "Database parameter group for ${var.identifier}"
-  family = var.engine_family
+  family      = var.engine_family
 
   parameter {
     apply_method = "immediate"
-    name = "autovacuum"
-    value = 1
+    name         = "autovacuum"
+    value        = 1
   }
 
   tags = {
-    "Name" = "parameter_group_${var.identifier}"
+    "Name" = "pg-${var.identifier}"
   }
 
   lifecycle {
