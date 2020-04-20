@@ -11,3 +11,8 @@ variable "fargate_namespaces" {
   description = "Namespaces that EKS will manage inside of fargate"
   type        = list(string)
 }
+
+variable "public_access" {
+  description = "Allow public access from internet to the control plane"
+  default     = false
+}

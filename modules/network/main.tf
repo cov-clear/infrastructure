@@ -17,8 +17,9 @@ resource "aws_subnet" "privates" {
   availability_zone = var.private_subnets[count.index].availability_zone
 
   tags = {
-    Name                              = "${var.short_name}-private-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
-    "kubernetes.io/role/internal-elb" = 1
+    Name                                      = "${var.short_name}-private-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
+    "kubernetes.io/role/internal-elb"         = 1
+    "kubernetes.io/cluster/${var.short_name}" = "shared"
   }
 }
 
