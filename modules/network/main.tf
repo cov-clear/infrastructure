@@ -18,7 +18,8 @@ resource "aws_subnet" "privates" {
 
   tags = {
     Name                                      = "${var.short_name}-private-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
-    "kubernetes.io/role/internal-elb"         = 1
+    KubernetesCluster                         = var.short_name
+    "kubernetes.io/role/internal-elb"         = "1"
     "kubernetes.io/cluster/${var.short_name}" = "shared"
   }
 }
@@ -32,9 +33,10 @@ resource "aws_subnet" "publics" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name                     = "${var.short_name}-public-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
-    KubernetesCluster        = var.short_name
-    "kubernetes.io/role/elb" = "1"
+    Name                                      = "${var.short_name}-public-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
+    KubernetesCluster                         = var.short_name
+    "kubernetes.io/role/elb"                  = "1"
+    "kubernetes.io/cluster/${var.short_name}" = "shared"
   }
 }
 

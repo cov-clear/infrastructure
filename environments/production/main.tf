@@ -1,6 +1,8 @@
 locals {
   project_name = "cov-clear-prod"
 
+  aws_region = "eu-west-1"
+
   public_subnets = [
     { availability_zone = "eu-west-1a", cidr = "10.0.0.0/22" },
     { availability_zone = "eu-west-1b", cidr = "10.0.4.0/22" },
@@ -34,7 +36,7 @@ module "network" {
   source = "../../modules/network"
 
   short_name = local.project_name
-  aws_region = "eu-west-1"
+  aws_region = local.aws_region
   cidr       = "10.0.0.0/16"
 
   public_subnets  = local.public_subnets
@@ -67,6 +69,7 @@ module "database" {
 module "kubernetes" {
   source = "../../modules/eks"
 
+  aws_region    = local.aws_region
   cluster_name  = local.project_name
   public_access = true # TODO: Close control place access behind a bastion
   subnet_ids    = module.network.private_subnet_ids
@@ -75,6 +78,7 @@ module "kubernetes" {
     "kube-system",
     "prod-cov-clear-backend",
     "staging-cov-clear-backend",
+    "kube-ingress",
   ]
 }
 

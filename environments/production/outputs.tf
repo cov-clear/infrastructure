@@ -17,3 +17,19 @@ output "db_username" {
 output "db_password" {
   value = module.database.password
 }
+
+output "vpc_id" {
+  value = module.network.vpc_id
+}
+
+output "vpc_region" {
+  value = local.aws_region
+}
+
+output "alb_role_arn" {
+  value = module.kubernetes.alb_role_arn
+}
+
+output "eks_cluster_name" {
+  value = local.project_name
+}

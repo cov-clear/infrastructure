@@ -1,3 +1,7 @@
+variable "aws_region" {
+  description = "Region where the EKS cluster lives"
+}
+
 variable "cluster_name" {
   description = "Name of the EKS cluster and all its policies"
 }
