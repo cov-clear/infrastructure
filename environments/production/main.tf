@@ -1,5 +1,6 @@
 locals {
   project_name = "cov-clear-prod"
+  domain_name  = "app.cov-clear.com"
 
   aws_region = "eu-west-1"
 
@@ -85,5 +86,6 @@ module "kubernetes" {
 module "backend_app" {
   source = "../../modules/backend"
 
-  app_name = "${local.project_name}-backend"
+  app_name    = "${local.project_name}-backend"
+  domain_name = local.domain_name
 }
