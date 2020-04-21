@@ -5,3 +5,7 @@ output "cluster_endpoint" {
 output "kubeconfig_certificate" {
   value = aws_eks_cluster.eks_cluster.certificate_authority.0.data
 }
+
+output "alb_role_arn" {
+  value = aws_iam_role.alb.arn
+}

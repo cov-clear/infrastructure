@@ -13,7 +13,7 @@ variable "allocated_storage" {
 
 variable "storage_encrypted" {
   description = "Should the DB storage be encrypted"
-  type = bool
+  type        = bool
 }
 
 variable "engine_version" {
@@ -52,18 +52,27 @@ variable "backup_retention_period" {
   default     = 14
 }
 
+variable "vpc_id" {
+  description = "ID of the VPC"
+}
+
 variable "subnet_ids" {
   description = "IDs of the subnets where the db instances should be created"
   type        = list(string)
 }
 
+variable "allowed_cidrs" {
+  description = "CIDRs with allowed access to the postgreSQL port"
+  type        = list(string)
+}
+
 variable "multi_az" {
   description = "Should the database be multi_az enabled"
-  type = bool
+  type        = bool
 }
 
 variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }

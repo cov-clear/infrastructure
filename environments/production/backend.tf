@@ -12,6 +12,10 @@ provider "template" {
   version = "~> v2.1"
 }
 
+provider "external" {
+  version = "~> v1.2"
+}
+
 terraform {
   backend "s3" {
     bucket  = "cov-clear-terraform"

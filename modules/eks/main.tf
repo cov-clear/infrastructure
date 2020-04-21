@@ -5,7 +5,7 @@ resource "aws_cloudwatch_log_group" "main" {
 
 resource "aws_eks_cluster" "eks_cluster" {
   name     = var.cluster_name
-  role_arn = aws_iam_role.main.arn
+  role_arn = aws_iam_role.eks.arn
 
   enabled_cluster_log_types = [
     "api",
@@ -16,14 +16,14 @@ resource "aws_eks_cluster" "eks_cluster" {
   ]
 
   vpc_config {
-    endpoint_public_access  = false
-    endpoint_private_access = false
+    endpoint_public_access  = var.public_access
+    endpoint_private_access = true
     subnet_ids              = var.subnet_ids
   }
 
   depends_on = [
-    "aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy",
-    "aws_iam_role_policy_attachment.eks-AmazonEKSServicePolicy",
-    "aws_cloudwatch_log_group.eks_cluster",
+    aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.eks-AmazonEKSServicePolicy,
+    aws_cloudwatch_log_group.main,
   ]
 }

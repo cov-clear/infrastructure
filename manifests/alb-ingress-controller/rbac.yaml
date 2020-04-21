@@ -1,0 +1,65 @@
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kube-ingress
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: alb-ingress-controller
+  labels:
+    app: alb-ingress-controller
+rules:
+  - apiGroups:
+      - ""
+      - extensions
+    resources:
+      - configmaps
+      - endpoints
+      - events
+      - ingresses
+      - ingresses/status
+      - services
+      - pods/status
+    verbs:
+      - create
+      - get
+      - list
+      - update
+      - watch
+      - patch
+  - apiGroups:
+      - ""
+      - extensions
+    resources:
+      - nodes
+      - pods
+      - secrets
+      - services
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: alb-ingress-controller
+  labels:
+    app: alb-ingress-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: alb-ingress-controller
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: kube-ingress
+

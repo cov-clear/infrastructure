@@ -17,8 +17,10 @@ resource "aws_subnet" "privates" {
   availability_zone = var.private_subnets[count.index].availability_zone
 
   tags = {
-    Name                              = "${var.short_name}-private-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
-    "kubernetes.io/role/internal-elb" = 1
+    Name                                      = "${var.short_name}-private-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
+    KubernetesCluster                         = var.short_name
+    "kubernetes.io/role/internal-elb"         = "1"
+    "kubernetes.io/cluster/${var.short_name}" = "shared"
   }
 }
 
@@ -31,9 +33,10 @@ resource "aws_subnet" "publics" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name                     = "${var.short_name}-public-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
-    KubernetesCluster        = var.short_name
-    "kubernetes.io/role/elb" = "1"
+    Name                                      = "${var.short_name}-public-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
+    KubernetesCluster                         = var.short_name
+    "kubernetes.io/role/elb"                  = "1"
+    "kubernetes.io/cluster/${var.short_name}" = "shared"
   }
 }
 
@@ -50,6 +53,11 @@ resource "aws_eip" "publics" {
   count = length(var.public_subnets)
 
   vpc = true
+
+  tags = {
+    Name              = "${var.short_name}-nat-${substr(var.public_subnets[count.index].availability_zone, -2, 2)}"
+    KubernetesCluster = var.short_name
+  }
 }
 
 resource "aws_nat_gateway" "privates" {
