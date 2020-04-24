@@ -20,7 +20,7 @@ terraform {
   backend "s3" {
     bucket  = "cov-clear-terraform"
     encrypt = true
-    key     = "output/production.tfstate"
+    key     = "output/cov-clear.tfstate"
     profile = "cov-clear"
     region  = "eu-west-1"
   }

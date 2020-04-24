@@ -13,7 +13,7 @@ variable "subnet_ids" {
 
 variable "fargate_namespaces" {
   description = "Namespaces that EKS will manage inside of fargate"
-  type        = list(string)
+  type        = map(map(any))
 }
 
 variable "public_access" {
