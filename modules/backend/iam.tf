@@ -1,15 +1,26 @@
-resource "aws_iam_user" "backend" {
-  name = var.app_name
+resource "aws_iam_role" "backend" {
+  name = "${var.app_name}-backend"
+
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRoleWithWebIdentity"
+      Effect = "Allow"
+      Principal = {
+        Federated = var.iam_oidc_arn
+      }
+      Condition = {
+        StringEquals = {
+          "${var.iam_oidc_provider}" = "system:serviceaccount:${var.namespace}:default"
+        }
+      }
+    }]
+    Version = "2012-10-17"
+  })
 }
 
-resource "aws_iam_access_key" "backend" {
-  user = aws_iam_user.backend.name
-}
-
-
-resource "aws_iam_user_policy" "send_emails" {
+resource "aws_iam_role_policy" "send_emails" {
   name = "SendEmails"
-  user = aws_iam_user.backend.name
+  role = aws_iam_role.backend.name
 
   policy = jsonencode({
     Statement = [{

@@ -61,7 +61,7 @@ module "kubernetes" {
     "kube-system" : {
       "subnet_ids" : module.network.private_subnet_ids
     },
-    "uk-1" : {
+    "uk" : {
       "subnet_ids" : module.network.private_subnet_ids
     },
     "ee" : {

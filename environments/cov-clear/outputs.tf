@@ -10,26 +10,38 @@ output "eks_cluster_name" {
   value = local.project_name
 }
 
-#output "alb_role_arn" {
-#  value = module.kubernetes.alb_role_arn
-#}
+output "alb_role_arn" {
+  value = module.kubernetes.alb_role_arn
+}
+
 #
-#output "backend_uk_1_app_access_key" {
-#  value = module.backend_app_uk_1.access_key
-#}
+# UK outputs
 #
-#output "backend_uk_1_app_secret_key" {
-#  value = module.backend_app_uk_1.secret_key
-#}
+
+output "db_uk_endpoint" {
+  value = module.database_uk.endpoint
+}
+
+output "db_uk_username" {
+  value = module.database_uk.username
+}
+
+output "db_uk_password" {
+  value = module.database_uk.password
+}
+
 #
-#output "db_uk_1_endpoint" {
-#  value = module.database_uk_1.endpoint
-#}
+# Estonian Outputs
 #
-#output "db_uk_1_username" {
-#  value = module.database_uk_1.username
-#}
-#
-#output "db_uk_1_password" {
-#  value = module.database_uk_1.password
-#}
+
+output "db_ee_endpoint" {
+  value = module.database_ee.endpoint
+}
+
+output "db_ee_username" {
+  value = module.database_ee.username
+}
+
+output "db_ee_password" {
+  value = module.database_ee.password
+}

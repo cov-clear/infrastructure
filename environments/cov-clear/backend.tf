@@ -4,16 +4,20 @@ provider "aws" {
   version = "~> 2.55"
 }
 
+provider "external" {
+  version = "~> v1.2"
+}
+
 provider "local" {
   version = "~> v1.4"
 }
 
-provider "template" {
-  version = "~> v2.1"
+provider "random" {
+  version = "~> v2.2"
 }
 
-provider "external" {
-  version = "~> v1.2"
+provider "template" {
+  version = "~> v2.1"
 }
 
 terraform {
