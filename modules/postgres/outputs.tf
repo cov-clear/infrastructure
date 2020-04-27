@@ -1,3 +1,7 @@
+output "connection_url" {
+  value = "postgres://${aws_db_instance.main.username}:${aws_db_instance.main.password}@${aws_db_instance.main.endpoint}/${aws_db_instance.main.name}"
+}
+
 output "address" {
   value = aws_db_instance.main.address
 }
@@ -15,7 +19,7 @@ output "username" {
 }
 
 output "password" {
-  value = aws_db_instance.main.password
+  value     = aws_db_instance.main.password
   sensitive = true
 }
 

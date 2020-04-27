@@ -10,7 +10,7 @@ resource "aws_iam_role" "backend" {
       }
       Condition = {
         StringEquals = {
-          "${var.iam_oidc_provider}" = "system:serviceaccount:${var.namespace}:default"
+          "${var.iam_oidc_provider}" = "system:serviceaccount:${var.namespace}:backend"
         }
       }
     }]

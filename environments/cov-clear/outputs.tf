@@ -18,30 +18,22 @@ output "alb_role_arn" {
 # UK outputs
 #
 
-output "db_uk_endpoint" {
-  value = module.database_uk.endpoint
+output "db_uk_url" {
+  value = module.database_uk.connection_url
 }
 
-output "db_uk_username" {
-  value = module.database_uk.username
-}
-
-output "db_uk_password" {
-  value = module.database_uk.password
+output "backend_app_uk_arn" {
+  value = module.backend_app_uk.role_arn
 }
 
 #
-# Estonian Outputs
+# Estonia outputs
 #
 
-output "db_ee_endpoint" {
-  value = module.database_ee.endpoint
+output "db_ee_url" {
+  value = module.database_ee.connection_url
 }
 
-output "db_ee_username" {
-  value = module.database_ee.username
-}
-
-output "db_ee_password" {
-  value = module.database_ee.password
+output "backend_app_ee_arn" {
+  value = module.backend_app_ee.role_arn
 }
