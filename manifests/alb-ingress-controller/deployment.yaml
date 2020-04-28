@@ -8,7 +8,6 @@ metadata:
   labels:
     app: alb-ingress-controller
 spec:
-  replicas: 3
   selector:
     matchLabels:
       name: alb-ingress-controller

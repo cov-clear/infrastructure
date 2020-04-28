@@ -1,9 +1,3 @@
-output "access_key" {
-  value = aws_iam_access_key.backend.id
+output "role_arn" {
+  value = aws_iam_role.backend.arn
 }
-
-output "secret_key" {
-  value     = aws_iam_access_key.backend.secret
-  sensitive = true
-}
-
