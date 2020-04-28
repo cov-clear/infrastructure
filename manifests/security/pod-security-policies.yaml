@@ -33,7 +33,7 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: covclear:podsecuritypolicy:privileged
+  name: cov-clear:podsecuritypolicy:privileged
   labels:
     app: psp-10-privileged
 rules:
@@ -51,13 +51,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: covclear:podsecuritypolicy:privileged
+  name: cov-clear:podsecuritypolicy:privileged
   namespace: kube-system
   labels:
     app: psp-10-privileged
 roleRef:
   kind: ClusterRole
-  name: covclear:podsecuritypolicy:privileged
+  name: cov-clear:podsecuritypolicy:privileged
   apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: Group
@@ -70,13 +70,13 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: covclear:podsecuritypolicy:privileged
+  name: cov-clear:podsecuritypolicy:privileged
   namespace: kube-ingress
   labels:
     app: psp-10-privileged
 roleRef:
   kind: ClusterRole
-  name: covclear:podsecuritypolicy:privileged
+  name: cov-clear:podsecuritypolicy:privileged
   apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: Group
@@ -130,7 +130,7 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: covclear:podsecuritypolicy:default
+  name: cov-clear:podsecuritypolicy:default
   labels:
     app: psp-99-default
 rules:
@@ -148,12 +148,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: covclear:podsecuritypolicy:default
+  name: cov-clear:podsecuritypolicy:default
   labels:
     app: psp-99-default
 roleRef:
   kind: ClusterRole
-  name: covclear:podsecuritypolicy:default
+  name: cov-clear:podsecuritypolicy:default
   apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: Group
