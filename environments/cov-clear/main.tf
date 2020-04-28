@@ -24,6 +24,10 @@ module "users" {
     "jose.galarza",
     "kostas.stamatoukos"
   ]
+
+  machines = {
+    "github" = ["continuous-delivery"],
+  }
 }
 
 module "emails" {

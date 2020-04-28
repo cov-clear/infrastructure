@@ -14,6 +14,10 @@ output "alb_role_arn" {
   value = module.kubernetes.alb_role_arn
 }
 
+output "machine_users" {
+  value = module.users.machine_users
+}
+
 #
 # UK outputs
 #
