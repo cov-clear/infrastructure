@@ -11,9 +11,9 @@ variable "namespace" {
 }
 
 variable "iam_oidc_arn" {
-  description = "ARN of the OIDC provider that will give permissions to the backend to access ARN resources"
+  description = "ARN of the OIDC provider that will give permissions to the backend to access AWS resources"
 }
 
 variable "iam_oidc_provider" {
-  description = "String identifying the OIDC provider that will give permissions to the backend to access ARN resources"
+  description = "String identifying the OIDC provider that will give permissions to the backend to access AWS resources"
 }
