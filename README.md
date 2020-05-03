@@ -61,8 +61,9 @@ $ kubectl get all
 
 ### Check the backend/web logs
 
-You need first [#get-access-to-the-k8s-cluster](access to the kubernetes cluster.) Once you have it, you only need to
-list the pods in the environment you are interested in. For example, for the UK deployment:
+You need first [access](https://github.com/cov-clear/terraform#get-access-to-the-k8s-cluster) to the kubernetes cluster.
+Once you have it, you only need to list the pods in the environment you are interested in. For example, for the UK
+deployment:
 
 ```sh
 $ kubectl -n uk get pods
@@ -71,5 +72,14 @@ $ kubectl -n uk get pods
 Now, pick one of the pods, and open its logs:
 
 ```sh
-$ kubectl -n uk logs uk-123123-123123
+$ kubectl -n uk logs backend-12asd123-12asd23
 ```
+
+If you want to read logs of multiple pods at the same time, I recommend you to install
+[stern](https://github.com/wercker/stern):
+
+```
+$ brew install stern
+$ stern -n uk backend
+```
+
