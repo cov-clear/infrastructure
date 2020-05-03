@@ -8,7 +8,7 @@ metadata:
     app: cov-clear
 rules:
   - apiGroups: [""]
-    resources: ["namespaces", "services", "serviceaccounts"]
+    resources: ["namespaces", "services", "serviceaccounts", "configmap"]
     verbs: ["get", "list", "update", "patch"]
   - apiGroups: ["apps"]
     resources: ["deployments"]
