@@ -22,7 +22,8 @@ module "users" {
 
   developers = [
     "jose.galarza",
-    "kostas.stamatoukos"
+    "kostas.stamatoukos",
+    "uku.tammet",
   ]
 
   machines = {
