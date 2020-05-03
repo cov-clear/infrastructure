@@ -64,7 +64,7 @@ resource "aws_iam_group_policy" "change_password" {
         "iam:ChangePassword"
       ]
       Effect   = "Allow"
-      Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"
+      Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}"
     }]
     Version = "2012-10-17"
   })
@@ -89,7 +89,7 @@ resource "aws_iam_group_policy" "manage_access_keys" {
         "iam:ListAccessKeys",
       ]
       Effect   = "Allow"
-      Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}"
+      Resource = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}"
     }]
     Version = "2012-10-17"
   })
@@ -117,8 +117,8 @@ resource "aws_iam_group_policy" "manage_2fa" {
       ]
       Effect = "Allow"
       Resource = [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/$${aws:username}",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
 
       ]
       }, {
@@ -127,8 +127,8 @@ resource "aws_iam_group_policy" "manage_2fa" {
       ]
       Effect = "Allow"
       Resource = [
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/&{aws:username}",
-        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/&{aws:username}",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/$${aws:username}",
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
 
       ]
       Condition = {

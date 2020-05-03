@@ -1,0 +1,33 @@
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cov-clear:developer
+  labels:
+    app: cov-clear
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["pods", "services", "pods/log", "namespaces", "replicationcontrollers", "events", "configmap"]
+    verbs: ["get", "list", "watch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cov-clear:developer
+  labels:
+    app: cov-clear
+roleRef:
+  kind: ClusterRole
+  name: cov-clear:developer
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: Group
+    name: cov-clear:developer
+    apiGroup: rbac.authorization.k8s.io
+
