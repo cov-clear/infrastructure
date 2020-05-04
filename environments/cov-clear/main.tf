@@ -20,14 +20,17 @@ locals {
 module "users" {
   source = "../../modules/users"
 
-  developers = [
-    "jose.galarza",
-    "kostas.stamatoukos",
-    "uku.tammet",
-  ]
+  admins = {
+    "jose.galarza"       = {},
+    "kostas.stamatoukos" = {},
+  }
 
-  machines = {
-    "github" = ["continuous-delivery"],
+  developers = {
+    "uku.tammet" = {},
+  }
+
+  continuous_delivery_bots = {
+    "github" = {},
   }
 }
 
@@ -55,6 +58,10 @@ module "kubernetes" {
   aws_region   = local.aws_region
   cluster_name = local.project_name
   subnet_ids   = module.network.private_subnet_ids
+
+  admins                   = module.users.admins
+  continuous_delivery_bots = module.users.continuous_delivery_bots
+  developers               = module.users.developers
 
   # TODO: Close control plane behind a bastion
   public_access = true

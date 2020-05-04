@@ -1,9 +1,14 @@
-variable "developers" {
-  description = "List with the usernames of all the developers"
-  type        = list(string)
+variable "admins" {
+  description = "Map with all the admins"
+  type        = map(map(string))
 }
 
-variable "machines" {
-  description = "Map with all the machines users plus their groups"
-  type        = map(list(string))
+variable "continuous_delivery_bots" {
+  description = "Map with all the continuous delivery bots"
+  type        = map(map(string))
+}
+
+variable "developers" {
+  description = "Map with all the developers"
+  type        = map(map(string))
 }

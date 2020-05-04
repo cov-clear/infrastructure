@@ -12,6 +12,10 @@ provider "local" {
   version = "~> v1.4"
 }
 
+provider "kubernetes" {
+  version = "~> v1.11"
+}
+
 provider "random" {
   version = "~> v2.2"
 }

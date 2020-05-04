@@ -1,4 +1,22 @@
-output "machine_users" {
+output "admins" {
+  value = {
+    for user in aws_iam_user.admins :
+    user.name => {
+      arn : user.arn,
+    }
+  }
+}
+
+output "developers" {
+  value = {
+    for user in aws_iam_user.developers :
+    user.name => {
+      arn : user.arn,
+    }
+  }
+}
+
+output "continuous_delivery_bots" {
   value = {
     for user in aws_iam_user.cd :
     user.name => {

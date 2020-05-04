@@ -1,3 +1,13 @@
+# You need to edit the configmap/aws-auth in kube-system to
+# assign this role to a role/user in AWS, adding the following block:
+#
+# mapUsers: |
+#  - userarn: arn:aws:iam::12345566:user/john.doe
+#    username: cov-clear:john.doe
+#    groups:
+#      - cov-clear:group:developer
+#
+
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
@@ -28,6 +38,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 subjects:
   - kind: Group
-    name: cov-clear:developer
+    name: cov-clear:group:developer
     apiGroup: rbac.authorization.k8s.io
 
