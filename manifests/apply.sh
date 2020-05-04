@@ -17,15 +17,18 @@ kubectl delete psp/eks.privileged
 kubectl delete clusterrole/eks:podsecuritypolicy:privileged
 kubectl delete clusterrolebinding/eks:podsecuritypolicy:authenticated
 
+# Create ingress namespace
+kubectl create namespace kube-ingress
+
 # Add our own security policy
 kubectl apply -f security/pod-security-policies.yaml
 kubectl apply -f security/manifests-applier.yaml
+kubectl apply -f security/developers.yaml
 
 # Patch coreDNS to run in fargate
 kubectl patch -n kube-system deployment/coredns --type json -p='[{"op": "remove", "path": "/spec/template/metadata/annotations/eks.amazonaws.com~1compute-type"}]'
 
 # Install the ALB ingress controller
-kubectl create namespace kube-ingress
 kubectl apply -f alb-ingress-controller/rbac.yaml
 sed "s/\[\[vpc_id\]\]/$VPC_ID/g;s/\[\[vpc_region\]\]/$VPC_REGION/g;s/\[\[cluster_name\]\]/$CLUSTER_NAME/g" alb-ingress-controller/deployment.yaml | kubectl apply -f -
 kubectl annotate --overwrite serviceaccount -n kube-ingress default eks.amazonaws.com/role-arn=$ALB_ARN

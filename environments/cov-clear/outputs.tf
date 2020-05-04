@@ -14,8 +14,8 @@ output "alb_role_arn" {
   value = module.kubernetes.alb_role_arn
 }
 
-output "machine_users" {
-  value = module.users.machine_users
+output "continuous_delivery_bots" {
+  value = module.users.continuous_delivery_bots
 }
 
 #

@@ -21,7 +21,7 @@ resource "aws_iam_role_policy_attachment" "fargate-AmazonEKSFargatePodExecutionR
 resource "aws_eks_fargate_profile" "fargate_profile" {
   for_each = var.fargate_namespaces
 
-  cluster_name           = aws_eks_cluster.eks_cluster.name
+  cluster_name           = aws_eks_cluster.main.name
   fargate_profile_name   = each.key
   pod_execution_role_arn = aws_iam_role.fargate.arn
   subnet_ids             = each.value.subnet_ids

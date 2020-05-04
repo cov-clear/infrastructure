@@ -1,9 +1,9 @@
 resource "aws_iam_group" "cd" {
-  name = "continuous-delivery"
+  name = "continuous-delivery-bots"
 }
 
 resource "aws_iam_group_policy" "eks" {
-  name  = "eks-read-access"
+  name  = "EKSReadOnlyAccess"
   group = aws_iam_group.cd.name
 
   policy = jsonencode({
