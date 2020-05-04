@@ -1,7 +1,7 @@
 resource "aws_security_group" "main" {
-  name = var.identifier
+  name = "${var.identifier}-postgres"
 
-  description = "Security group for ${var.identifier}"
+  description = "Security group for the PostgreSQL of ${var.identifier}"
   vpc_id      = var.vpc_id
 
   ingress {
