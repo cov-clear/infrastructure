@@ -26,7 +26,8 @@ module "users" {
   }
 
   developers = {
-    "uku.tammet" = {},
+    "uku.tammet"  = {},
+    "harsh.sinha" = {},
   }
 
   continuous_delivery_bots = {
