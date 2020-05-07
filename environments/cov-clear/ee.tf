@@ -25,7 +25,7 @@ module "backend_app_ee" {
   source = "../../modules/backend"
 
   app_name    = "cov-clear-ee"
-  domain_name = "ee.cov-clear.com"
+  domain_name = "app.immunitypassport.co"
   namespace   = "ee"
 
   iam_oidc_arn      = module.kubernetes.iam_oidc_arn
