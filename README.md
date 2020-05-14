@@ -9,13 +9,13 @@ There are two main things happening in this repository
 
 #### terraform
 
-This are two folders with terraform files:
+There are two folders with terraform files:
 
 - **modules**: All the modules that implement the resources needed for cov-clear. At the moment, this is mainly a secure
   VPC, a PostgreSQL RDS database and an EKS cluster (managed by fargate).
 - **environments**: There is one folder for each environment where cov-clear is installed. There is only one at the moment
   as we are running all the environments in the same EKS cluster, but different namespaces. All the terraform commands
-  (plan, apply, ...), must be run from inside one of the envs.
+  (plan, apply, ...), must be run from inside of one the envs.
 
 #### manifests
 
@@ -30,7 +30,7 @@ sure your kubectl is pointing to the right context before running it
 
 ### Get access to the k8s cluster
 
-First you need to install a set of dependencies:
+First, you need to install a set of dependencies:
 
 ```
 $ pip install awscli
@@ -41,7 +41,7 @@ Now you need to [add yourself](https://github.com/cov-clear/terraform/pull/1) to
 applied, login to the AWS console, go to IAM, users, your user, reset your password, add a 2FA device, and generate
 a pair of access/secret keys.
 
-You can now configure your AWS cli:
+You can now configure your AWS CLI:
 
 ```sh
 $ aws configure
