@@ -19,18 +19,6 @@ output "continuous_delivery_bots" {
 }
 
 #
-# UK outputs
-#
-
-output "db_uk_url" {
-  value = module.database_uk.connection_url
-}
-
-output "backend_app_uk_arn" {
-  value = module.backend_app_uk.role_arn
-}
-
-#
 # Estonia outputs
 #
 

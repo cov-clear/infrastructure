@@ -13,8 +13,8 @@ module "database_ee" {
   db_user           = "cov_clear"
   engine_family     = "postgres12"
   engine_version    = "12.2"
-  multi_az          = true
-  instance_class    = "db.t3.medium"
+  multi_az          = false
+  instance_class    = "db.t3.micro"
   vpc_id            = module.network.vpc_id
   subnet_ids        = module.network.private_subnet_ids
   allowed_cidrs     = local.private_subnets.*.cidr
